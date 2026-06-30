@@ -7,7 +7,6 @@ on:
 
 jobs:
   build-and-deploy:
-
     runs-on: ubuntu-latest
 
     steps:
@@ -19,6 +18,7 @@ jobs:
         with:
           java-version: '21'
           distribution: 'temurin'
+          cache: maven
 
       - name: Build JAR
         run: mvn clean package -DskipTests
@@ -30,14 +30,31 @@ jobs:
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_KEY }}
           source: "target/*.jar"
-          target: "/home/ubuntu/app/"
+          target: "/home/ubuntu/app"
 
-      - name: Restart App on EC2
+      - name: Restart Spring Boot Application
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_KEY }}
           script: |
-            pkill -f 'java -jar' || true
-            nohup java -jar /home/ubuntu/app/*.jar > app.log 2>&1 &
+            mkdir -p /home/ubuntu/app
+
+            # Stop old application (if running)
+            pkill -f '\.jar' || true
+
+            # Wait for process to stop
+            sleep 2
+
+            # Go to uploaded JAR location
+            cd /home/ubuntu/app/target
+
+            # Start new application
+            nohup java -jar *.jar > /home/ubuntu/app/app.log 2>&1 &
+
+            # Wait for startup
+            sleep 10
+
+            # Show application log
+            cat /home/ubuntu/app/app.log
