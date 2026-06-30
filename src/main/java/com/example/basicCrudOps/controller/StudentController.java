@@ -59,4 +59,10 @@ public class StudentController {
 		return new ResponseEntity<String>("Goood AfterNoon", HttpStatus.OK);
 	}
 
+	
+	@GetMapping("greet-vijay")
+	public ResponseEntity<String> greetVijay() {
+		return new ResponseEntity<String>("Goood Morning Vijay", HttpStatus.OK);
+	}
+
 }
