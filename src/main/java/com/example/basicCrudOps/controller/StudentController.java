@@ -62,7 +62,7 @@ public class StudentController {
 	
 	@GetMapping("greet-vijay")
 	public ResponseEntity<String> greetVijay() {
-		return new ResponseEntity<String>("Goood Morning Vijay", HttpStatus.OK);
+		return new ResponseEntity<String>("Goood Morning Olivya", HttpStatus.OK);
 	}
 
 }
