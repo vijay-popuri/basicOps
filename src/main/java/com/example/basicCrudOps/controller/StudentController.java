@@ -53,5 +53,10 @@ public class StudentController {
 		Student data = ser.getById(rno);
 		return new ResponseEntity<Student>(data, HttpStatus.OK);
 	}
+	
+	@GetMapping("greet")
+	public ResponseEntity<String> greet() {
+		return new ResponseEntity<String>("Goood AfterNoon", HttpStatus.OK);
+	}
 
 }
