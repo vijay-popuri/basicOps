@@ -35,6 +35,7 @@ public class StudentService {
 			if (list.get(i).getRno() == st.getRno()) {
 				list.set(i, st);
 				break;
+				
 			}
 		}
 		return list;
