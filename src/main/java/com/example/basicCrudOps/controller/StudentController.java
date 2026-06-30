@@ -27,6 +27,7 @@ public class StudentController {
 	public ResponseEntity<List<Student>> createStudent(@RequestBody Student req) {
 		List<Student> data = ser.addStudent(req);
 		return new ResponseEntity<List<Student>>(data, HttpStatus.OK);
+		
 	}
 
 	@PutMapping
