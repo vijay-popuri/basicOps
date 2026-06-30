@@ -39,22 +39,5 @@ jobs:
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_KEY }}
           script: |
-            mkdir -p /home/ubuntu/app
-
-            # Stop old application (if running)
-            pkill -f '\.jar' || true
-
-            # Wait for process to stop
-            sleep 2
-
-            # Go to uploaded JAR location
-            cd /home/ubuntu/app/target
-
-            # Start new application
-            nohup java -jar *.jar > /home/ubuntu/app/app.log 2>&1 &
-
-            # Wait for startup
-            sleep 10
-
-            # Show application log
-            cat /home/ubuntu/app/app.log
+            sudo systemctl restart basiccrudops
+            sudo systemctl status basiccrudops --no-pager
