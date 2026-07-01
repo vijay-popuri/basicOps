@@ -41,6 +41,7 @@ public class StudentController {
 	public ResponseEntity<List<Student>> deleteStudent(@PathVariable int rno) {
 		List<Student> data = ser.deleteStudent(rno);
 		return new ResponseEntity<List<Student>>(data, HttpStatus.OK);
+		
 	}
 
 	@GetMapping
