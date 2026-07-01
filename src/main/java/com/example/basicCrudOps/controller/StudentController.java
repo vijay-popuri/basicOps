@@ -1,5 +1,6 @@
 package com.example.basicCrudOps.controller;
 
+import java.net.InetAddress;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
@@ -63,6 +64,11 @@ public class StudentController {
 	@GetMapping("greet-vijay")
 	public ResponseEntity<String> greetVijay() {
 		return new ResponseEntity<String>("Goood Morning Olivya", HttpStatus.OK);
+	}
+	
+	@GetMapping("/home")
+	public String home() throws Exception {
+	    return "Hello from " + InetAddress.getLocalHost().getHostName();
 	}
 
 }
